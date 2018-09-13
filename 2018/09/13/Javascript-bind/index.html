@@ -3,17 +3,20 @@
 <head>
   <meta charset="utf-8">
   
-  <title>Javascript bind | vidy&#39;s blog</title>
+  <title>Javascript bind的应用场景及实现思路 | vidy&#39;s blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="keywords" content="javascript bind this">
+  <meta name="description" content="#Javascript bind的实现思路 ###this的指向问题在深入了解Js中的bind函数前我们先来看一段代码12const $ = document.querySelector;const div = $(&apos;div&apos;);   以上代码将产生如下的错误VM723:2 Uncaught TypeError: Illegal invocation    at :2:1 我们来深入了解">
+<meta name="keywords" content="javascript bind this">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Javascript bind">
+<meta property="og:title" content="Javascript bind的应用场景及实现思路">
 <meta property="og:url" content="http://boneVidy.github.io/2018/09/13/Javascript-bind/index.html">
 <meta property="og:site_name" content="vidy&#39;s blog">
+<meta property="og:description" content="#Javascript bind的实现思路 ###this的指向问题在深入了解Js中的bind函数前我们先来看一段代码12const $ = document.querySelector;const div = $(&apos;div&apos;);   以上代码将产生如下的错误VM723:2 Uncaught TypeError: Illegal invocation    at :2:1 我们来深入了解">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2018-09-13T03:19:52.803Z">
+<meta property="og:updated_time" content="2018-09-13T03:54:13.660Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Javascript bind">
+<meta name="twitter:title" content="Javascript bind的应用场景及实现思路">
+<meta name="twitter:description" content="#Javascript bind的实现思路 ###this的指向问题在深入了解Js中的bind函数前我们先来看一段代码12const $ = document.querySelector;const div = $(&apos;div&apos;);   以上代码将产生如下的错误VM723:2 Uncaught TypeError: Illegal invocation    at :2:1 我们来深入了解">
   
     <link rel="alternate" href="/atom.xml" title="vidy&#39;s blog" type="application/atom+xml">
   
@@ -76,7 +79,7 @@
         
   
     <h1 class="article-title" itemprop="name">
-      Javascript bind
+      Javascript bind的应用场景及实现思路
     </h1>
   
 
@@ -84,11 +87,22 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        
+        <p>#Javascript bind的实现思路</p>
+<p>###this的指向问题<br>在深入了解Js中的bind函数前我们先来看一段代码<br><figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> $ = <span class="built_in">document</span>.querySelector;</span><br><span class="line"><span class="keyword">const</span> div = $(<span class="string">'div'</span>);</span><br></pre></td></tr></table></figure></p>
+<p>  以上代码将产生如下的错误<br>VM723:2 Uncaught TypeError: Illegal invocation<br>    at <anonymous>:2:1</anonymous></p>
+<p>我们来深入了解下为什么会报错</p>
+<ol>
+<li>querySelector 这个方法是document对象下的方法，window对象下并没有这个方法</li>
+<li>正确的操作应该时什么样的呢？</li>
+</ol>
+<p>###bind方法的使用</p>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> $ = <span class="built_in">document</span>.querySelector.bind(<span class="built_in">document</span>);</span><br><span class="line"><span class="keyword">const</span> div = $(<span class="string">'div'</span>);</span><br><span class="line"><span class="comment">// 返回结果 &lt;div&gt;......&lt;/div&gt;</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 使用call方法或者apply方法也是可以的</span></span><br><span class="line"><span class="keyword">const</span> $ = <span class="built_in">document</span>.querySelector;</span><br><span class="line"><span class="keyword">const</span> div = $.call(<span class="built_in">document</span>,<span class="string">'div'</span>);</span><br><span class="line"><span class="comment">// 返回结果 &lt;div&gt;......&lt;/div&gt;</span></span><br></pre></td></tr></table></figure>
+
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://boneVidy.github.io/2018/09/13/Javascript-bind/" data-id="cjm00gopk00007grn2iw0y21c" class="article-share-link">Share</a>
+      <a data-url="http://boneVidy.github.io/2018/09/13/Javascript-bind/" data-id="cjm01ix170000kdrnpy6k28m0" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/javascript-bind-this/">javascript bind this</a></li></ul>
@@ -143,7 +157,7 @@
       <ul>
         
           <li>
-            <a href="/2018/09/13/Javascript-bind/">Javascript bind</a>
+            <a href="/2018/09/13/Javascript-bind/">Javascript bind的应用场景及实现思路</a>
           </li>
         
       </ul>
